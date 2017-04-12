@@ -25,7 +25,11 @@ class PostsController < ApplicationController
 
 	def update
 	  @post = Post.find(params[:id])
-	  @post.update(title: params[:title], description: params[:description])
+		#@post.update(title: params[:title], description: params[:description])
+		@post.update(params.require(:post))
+		#need to require the :post because its attributes are
+		#now nested within the post hash with the new post hash structure
+		#introduced by form_for in the edit form 
 	  redirect_to post_path(@post)
 	end
 end
